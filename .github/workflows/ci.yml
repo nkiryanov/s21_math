@@ -1,4 +1,4 @@
-name: Lint and build
+name: Lint and test
 
 on:
   push:
@@ -17,8 +17,14 @@ jobs:
         with:
           python-version: "3.10.8"
 
+      - name: install check testing framework
+        run: sudo apt-get install check -y
+
       - name: lint
         run: make lint
 
-      - name: build
+      - name: build is ok
         run: make
+
+      - name: test
+        run: make test
