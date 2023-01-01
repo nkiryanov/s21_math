@@ -27,7 +27,7 @@ echo:
 
 lint:
 	cp ../materials/linters/CPPLINT.cfg .
-	python3 ../materials/linters/cpplint.py --extension=c $(SRC_DIR)*
+	python3 ../materials/linters/cpplint.py --extension=c $(SRC_DIR)* $(TEST_DIR)*
 	rm CPPLINT.cfg
 
 test tests: $(TEST_EXEC)
@@ -45,7 +45,7 @@ $(TEST_DIR)%.o: $(TEST_DIR)%.c
 
 $(TEST_EXEC): LDLIBS += $(shell pkg-config --libs check)
 $(TEST_EXEC): $(TEST_OBJ) $(LIB)
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 clean:
 	rm -rf $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_EXEC)
