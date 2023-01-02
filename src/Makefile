@@ -26,9 +26,9 @@ echo:
 	@echo LDLIBS=$(LDLIBS)
 
 lint:
-	cp ../materials/linters/CPPLINT.cfg .
-	python3 ../materials/linters/cpplint.py --extension=c $(SRC_DIR)* $(TEST_DIR)*
-	rm CPPLINT.cfg
+	@cp ../materials/linters/CPPLINT.cfg .
+	@python3 ../materials/linters/cpplint.py --extension=c $(SRC_DIR)* $(TEST_DIR)*
+	@rm CPPLINT.cfg
 
 test tests: $(TEST_EXEC)
 	@$^

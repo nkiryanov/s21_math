@@ -8,6 +8,7 @@ Suite *suite_s21_math(void) {
 
   s = suite_create("Tests s21_math");
   suite_add_tcase(s, tcase_s21_abs());
+  suite_add_tcase(s, tcase_s21_fabs());
 
   return s;
 }
