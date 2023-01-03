@@ -5,5 +5,6 @@
 
 TCase *tcase_s21_abs(void);
 TCase *tcase_s21_fabs(void);
+TCase *tcase_s21_sqrt(void);
 
 #endif /* SRC_TESTS_TEST_CASES_H_ */
