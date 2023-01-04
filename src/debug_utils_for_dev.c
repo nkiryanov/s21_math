@@ -36,13 +36,13 @@ int main() {
 
   double_bits x_bits;
   x_bits.double_value = x;
-
   printBits(sizeof(double_bits), &x_bits);
-
-  x = NAN;
-  printf("is_nan=%d\n", s21_isnan(x));
-  printf("is_not_nan=%d\n", s21_isnan(100.0));
 
   x = S21_INFINITY;
   printBits(sizeof(x), &x);
+
+  x = -8000.2203023;
+
+  printf("exp_x =%lf\n", exp(x));
+  printf("s21_exp=%Lf\n", s21_exp(x));
 }

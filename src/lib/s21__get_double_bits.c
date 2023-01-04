@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+#include "../s21_math.h"
+
 uint64_t _get_double_bits(double x) {
   union {
     double as_double;

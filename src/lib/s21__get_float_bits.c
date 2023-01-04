@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+#include "../s21_math.h"
+
 uint32_t _get_float_bits(float x) {
   union {
     float as_float;
