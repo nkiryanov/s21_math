@@ -5,14 +5,11 @@ long double s21_sqrt(double x) {
   double right_edge;
   double middle;
 
-  if s21_isnan(x)
-    return x;
+  if (s21_isnan(x) || x == 0.0) return x;
 
-  if (x == 0.0)
-    return x;
+  if (x < 0) return S21_NAN;
 
-  if (s21_fabs(x - 1.0) < S21_EPS)
-    return x;
+  if (s21_fabs(x - 1.0) < S21_EPS) return x;
 
   left_edge = x > 1 ? 0.0 : x;
   right_edge = x > 1 ? x : 1.0;

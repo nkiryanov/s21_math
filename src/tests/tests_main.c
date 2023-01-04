@@ -9,6 +9,9 @@ Suite *suite_s21_math(void) {
   s = suite_create("Tests s21_math");
   suite_add_tcase(s, tcase_s21_abs());
   suite_add_tcase(s, tcase_s21_fabs());
+  suite_add_tcase(s, tcase_s21_isinf());
+  suite_add_tcase(s, tcase_s21_isnan());
+  suite_add_tcase(s, tcase_s21_signbit());
   suite_add_tcase(s, tcase_s21_sqrt());
 
   return s;
