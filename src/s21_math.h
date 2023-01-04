@@ -6,8 +6,8 @@
 /* ---------------------------------
          Internal functions
 ------------------------------------*/
-u_int32_t _get_float_bits(float x);
-u_int64_t _get_double_bits(double x);
+uint32_t _get_float_bits(float x);
+uint64_t _get_double_bits(double x);
 
 /* ---------------------------------
   User-faced defines and function

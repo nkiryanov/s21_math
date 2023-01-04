@@ -1,9 +1,9 @@
 #include <stdint.h>
 
-u_int32_t _get_float_bits(float x) {
+uint32_t _get_float_bits(float x) {
   union {
     float as_float;
-    u_int32_t as_uint;
+    uint32_t as_uint;
   } x_bits;
 
   x_bits.as_float = x;
