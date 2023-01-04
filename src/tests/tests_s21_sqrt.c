@@ -41,7 +41,7 @@ START_TEST(negative_zero_return_itself) {
   sign = signbit(s21_sqrt(x));
 
   ck_assert_double_eq(s21_sqrt(x), -0.0);
-  ck_assert_int_eq(sign, 1);  // for negative values signbit has to be 1
+  ck_assert_int_gt(sign, 0);  // for negative zero signbit has NOT to be 0
 }
 END_TEST
 

@@ -59,7 +59,7 @@ START_TEST(negative_zero_return_one) {
 
   sign = s21_signbit(x);
 
-  ck_assert_int_eq(sign, 1);
+  ck_assert_int_gt(sign, 0);
 }
 END_TEST
 
@@ -79,7 +79,7 @@ START_TEST(negative_infinity_return_one) {
 
   sign = s21_signbit(x);
 
-  ck_assert_int_eq(sign, 1);
+  ck_assert_int_gt(sign, 0);
 }
 END_TEST
 
@@ -99,7 +99,7 @@ START_TEST(negative_nan_return_one) {
 
   sign = s21_signbit(x);
 
-  ck_assert_int_eq(sign, 1);
+  ck_assert_int_gt(sign, 0);
 }
 END_TEST
 
