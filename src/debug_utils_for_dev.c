@@ -32,17 +32,29 @@ void printBits(size_t const size, void const *const ptr) {
 }
 
 int main() {
-  double x = -INFINITY;
+  double x = -100.000001223;;
 
-  double_bits x_bits;
-  x_bits.double_value = x;
-  printBits(sizeof(double_bits), &x_bits);
+  double_bits bits;
+  double std_result;
+  double s21_result;
 
-  x = S21_INFINITY;
-  printBits(sizeof(x), &x);
+  std_result = exp(x);
+  bits.double_value = std_result;
+  printBits(sizeof(double_bits), &bits);
+  printf("std_dec_result=%20.20lf\n", std_result);
+  printf("std_result_as_hex=%llx\n", bits.bits);
 
-  x = -8000.2203023;
+  s21_result = s21_exp(x);
+  bits.double_value = s21_result;
+  printBits(sizeof(double_bits), &bits);
+  printf("s21_dec_result=%20.20ff\n", s21_result);
+  printf("s21_result_as_hex=%llx\n", bits.bits);
 
-  printf("exp_x =%lf\n", exp(x));
-  printf("s21_exp=%Lf\n", s21_exp(x));
+  // x = S21_INFINITY;
+  // printBits(sizeof(x), &x);
+
+  // x = -8000.2203023;
+
+  // printf("exp_x =%lf\n", exp(x));
+  // printf("s21_exp=%Lf\n", s21_exp(x));
 }

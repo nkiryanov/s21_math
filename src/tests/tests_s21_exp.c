@@ -10,6 +10,40 @@ START_TEST(regular_positive) {
 }
 END_TEST
 
+START_TEST(small_regular_positive) {
+  double x = 0.000001223;
+
+  ck_assert_double_eq_tol(s21_exp(x), exp(x), S21_EPS);
+}
+END_TEST
+
+START_TEST(small_regular_negative) {
+  double x = -0.000001223;
+
+  ck_assert_double_eq_tol(s21_exp(x), exp(x), S21_EPS);
+}
+END_TEST
+
+START_TEST(regular_positive_big_but_not_overflow) {
+  double x = 150.329239;
+  u_int64_t std_first_16_digits;
+  u_int64_t s21_first_16_digits;
+
+  std_first_16_digits = _get_double_bits(exp(x)) >> (64 - 16);
+  s21_first_16_digits = _get_double_bits(exp(x)) >> (64 - 16);
+
+  // We don't have very good accuracy, but first 16 digits has to be enough
+  ck_assert_uint_eq(s21_first_16_digits, std_first_16_digits);
+}
+END_TEST
+
+START_TEST(regular_negative_big_but_not_overflow) {
+  double x = -100.000001223;
+
+  ck_assert_double_eq_tol(s21_exp(x), exp(x), S21_EPS);
+}
+END_TEST
+
 START_TEST(positive_must_overflow) {
   double x = 800;
 
@@ -47,7 +81,6 @@ START_TEST(negative_zero_return_one) {
 
   ck_assert_double_eq(exp(x), 1.0);  // To be sure stdlib return 0
   ck_assert_ldouble_eq(s21_exp(x), 1.0);
-  ;
 }
 END_TEST
 
@@ -87,6 +120,10 @@ TCase *tcase_s21_exp(void) {
   tc = tcase_create("Test for `s21_exp` implementation.");
 
   tcase_add_test(tc, regular_positive);
+  tcase_add_test(tc, small_regular_positive);
+  tcase_add_test(tc, small_regular_negative);
+  tcase_add_test(tc, regular_positive_big_but_not_overflow);
+  tcase_add_test(tc, regular_negative_big_but_not_overflow);
   tcase_add_test(tc, positive_must_overflow);
   tcase_add_test(tc, positive_nan_return_nan);
   tcase_add_test(tc, negative_infinity_return_negative_zero);
