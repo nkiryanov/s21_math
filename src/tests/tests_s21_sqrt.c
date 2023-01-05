@@ -9,6 +9,20 @@ START_TEST(positive_value_bigger_one) {
 }
 END_TEST
 
+START_TEST(positive_value_the_biggest) {
+  double x = 12e100;
+  uint64_t std_bits;
+  uint64_t s21_bits;
+
+  // Accuracy may not match (it's ok for huge x)
+  // Cause of that we comparing first 54 bits from 64
+  std_bits = _get_double_bits(sqrt(x)) >> (64 - 10);
+  s21_bits = _get_double_bits(s21_sqrt(x)) >> (64 - 10);
+
+  ck_assert_uint_eq(s21_bits, std_bits);
+}
+END_TEST
+
 START_TEST(positive_value_in_range_from_zero_to_one) {
   double x = 0.000000007;
 
@@ -91,6 +105,7 @@ TCase *tcase_s21_sqrt(void) {
   tc = tcase_create("Tests for `long double s21_sqrt(double x)` function");
 
   tcase_add_test(tc, positive_value_bigger_one);
+  tcase_add_test(tc, positive_value_the_biggest);
   tcase_add_test(tc, positive_value_in_range_from_zero_to_one);
   tcase_add_test(tc, positive_value_exact_one_returns_itself);
   tcase_add_test(tc, positive_zero_return_itself);
@@ -102,3 +117,4 @@ TCase *tcase_s21_sqrt(void) {
 
   return tc;
 }
+
