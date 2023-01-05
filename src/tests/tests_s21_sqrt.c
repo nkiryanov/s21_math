@@ -117,4 +117,3 @@ TCase *tcase_s21_sqrt(void) {
 
   return tc;
 }
-

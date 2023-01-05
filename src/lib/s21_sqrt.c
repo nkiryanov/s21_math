@@ -15,7 +15,7 @@ long double s21_sqrt(double x) {
   right_edge = x > 1 ? x / 2 : 1.0;
 
   // For huge `x` use counter to stop iteration cause step delta may
-  // be much more than epsilon and it will not work at all (ex. x = 12e1
+  // be much more than epsilon and it will not work at all (ex. x = 12e1)
   for (int i = 0; i <= 400 && (right_edge - left_edge > S21_EPS); i++) {
     middle = (right_edge - left_edge) / 2.0 + left_edge;
 

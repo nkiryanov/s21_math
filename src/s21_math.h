@@ -6,7 +6,7 @@
 /* ---------------------------------
         User-faced defines
 ------------------------------------*/
-#define S21_EPS 1e-7
+#define S21_EPS 1e-9
 #define S21_EXP 2.71828182846l
 
 // Maybe not the best, but easiest way
@@ -46,6 +46,7 @@ int s21_abs(int x);
 long double s21_exp(double x);
 long double s21_fabs(double x);
 long double s21_log(double x);
+long double s21_pow(double base, double exp);
 long double s21_sqrt(double x);
 
 /* ---------------------------------

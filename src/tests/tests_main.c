@@ -14,6 +14,7 @@ Suite *suite_s21_math(void) {
   suite_add_tcase(suite, tcase_s21_isinf());
   suite_add_tcase(suite, tcase_s21_isnan());
   suite_add_tcase(suite, tcase_s21_log());
+  suite_add_tcase(suite, tcase_s21_pow());
   suite_add_tcase(suite, tcase_s21_signbit());
   suite_add_tcase(suite, tcase_s21_sqrt());
 
