@@ -9,6 +9,7 @@ TCase *tcase_s21_fabs(void);
 TCase *tcase_s21_isfinite(void);
 TCase *tcase_s21_isinf(void);
 TCase *tcase_s21_isnan(void);
+TCase *tcase_s21_log(void);
 TCase *tcase_s21_signbit(void);
 TCase *tcase_s21_sqrt(void);
 

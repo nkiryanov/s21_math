@@ -1,6 +1,6 @@
 #include "../s21_math.h"
 
-double _s21_exp_positive_x(double x) {
+double _s21_exp_non_negative(double x) {
   double taylor_sum;
   double taylor_term;
   int taylor_term_num;
@@ -13,7 +13,7 @@ double _s21_exp_positive_x(double x) {
   taylor_term = x;
   taylor_term_num = 1;
 
-  while (s21_fabs(taylor_term) > S21_EPS && s21_isfinite(taylor_sum)) {
+  while (taylor_term > S21_EPS && s21_isfinite(taylor_sum)) {
     taylor_sum += taylor_term;
     taylor_term *= x / ++taylor_term_num;
   }
@@ -22,5 +22,5 @@ double _s21_exp_positive_x(double x) {
 }
 
 long double s21_exp(double x) {
-  return (x < 0) ? 1 / _s21_exp_positive_x(-x) : _s21_exp_positive_x(x);
+  return (x < 0) ? 1 / _s21_exp_non_negative(-x) : _s21_exp_non_negative(x);
 }

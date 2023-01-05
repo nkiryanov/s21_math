@@ -7,6 +7,7 @@
         User-faced defines
 ------------------------------------*/
 #define S21_EPS 1e-7
+#define S21_EXP 2.71828182846l
 
 // Maybe not the best, but easiest way
 #define S21_INFINITY (1.0 / 0.0)
@@ -17,7 +18,7 @@
 // 2. Set null all non meaningful bits
 // 3. Compare bits value with same size infinite. NaN has to be bigger
 //
-// See https://float.exposed/0x7ff0000000000000 for what the magic values mean.
+// See https://float.exposed/0x7ff0000000000000 what the magic values mean.
 
 #define s21_isnan(x)                                      \
   ((sizeof(x) == sizeof(float))                           \
@@ -42,9 +43,10 @@
         User-faced functions
 ------------------------------------*/
 int s21_abs(int x);
-long double s21_fabs(double x);
-long double s21_sqrt(double x);
 long double s21_exp(double x);
+long double s21_fabs(double x);
+long double s21_log(double x);
+long double s21_sqrt(double x);
 
 /* ---------------------------------
          Internal functions

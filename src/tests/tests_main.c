@@ -4,19 +4,20 @@
 #include "test_cases.h"
 
 Suite *suite_s21_math(void) {
-  Suite *s;
+  Suite *suite;
 
-  s = suite_create("Tests s21_math");
-  suite_add_tcase(s, tcase_s21_abs());
-  suite_add_tcase(s, tcase_s21_exp());
-  suite_add_tcase(s, tcase_s21_fabs());
-  suite_add_tcase(s, tcase_s21_isfinite());
-  suite_add_tcase(s, tcase_s21_isinf());
-  suite_add_tcase(s, tcase_s21_isnan());
-  suite_add_tcase(s, tcase_s21_signbit());
-  suite_add_tcase(s, tcase_s21_sqrt());
+  suite = suite_create("Tests s21_math");
+  suite_add_tcase(suite, tcase_s21_abs());
+  suite_add_tcase(suite, tcase_s21_exp());
+  suite_add_tcase(suite, tcase_s21_fabs());
+  suite_add_tcase(suite, tcase_s21_isfinite());
+  suite_add_tcase(suite, tcase_s21_isinf());
+  suite_add_tcase(suite, tcase_s21_isnan());
+  suite_add_tcase(suite, tcase_s21_log());
+  suite_add_tcase(suite, tcase_s21_signbit());
+  suite_add_tcase(suite, tcase_s21_sqrt());
 
-  return s;
+  return suite;
 }
 
 int main(void) {
