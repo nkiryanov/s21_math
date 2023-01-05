@@ -1,32 +1,26 @@
 #include "../s21_math.h"
 
-long double s21_exp(double x) {
+double _s21_exp_positive_x(double x) {
   double taylor_sum;
-  double taylor_member;
-  int is_x_negative;
+  double taylor_term;
+  int taylor_term_num;
 
   if s21_isnan (x) return x;
 
-  if (s21_isinf(x) && s21_signbit(x)) return +0.0;  // x is -Inf
-
-  if s21_isinf (x) return x;  // +Inf, just an optimization
-
-  is_x_negative = (x < 0) ? 1 : 0;
-  x = (x > 0) ? x : -x;
+  if s21_isinf (x) return x;  // +Inf, just as an optimization
 
   taylor_sum = 1.0;
-  taylor_member = x;
+  taylor_term = x;
+  taylor_term_num = 1;
 
-  for (int n = 2; s21_fabs(taylor_member) > S21_EPS && s21_isfinite(taylor_sum);
-       n++) {
-    taylor_sum += taylor_member;
-    taylor_member *= x / n;
+  while (s21_fabs(taylor_term) > S21_EPS && s21_isfinite(taylor_sum)) {
+    taylor_sum += taylor_term;
+    taylor_term *= x / ++taylor_term_num;
   }
 
-  if (is_x_negative) {
-    if s21_isfinite(taylor_sum) taylor_sum = 1 / taylor_sum;
-    if s21_isinf(taylor_sum) taylor_sum = +0.0;  // when overflow return +0.0
-  }
+  return taylor_sum;
+}
 
-  return (long double)taylor_sum;
+long double s21_exp(double x) {
+  return (x < 0) ? 1 / _s21_exp_positive_x(-x) : _s21_exp_positive_x(x);
 }
