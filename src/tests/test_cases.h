@@ -6,6 +6,7 @@
 TCase *tcase_s21_abs(void);
 TCase *tcase_s21_exp(void);
 TCase *tcase_s21_fabs(void);
+TCase *tcase_s21_floor(void);
 TCase *tcase_s21_isfinite(void);
 TCase *tcase_s21_isinf(void);
 TCase *tcase_s21_isnan(void);
