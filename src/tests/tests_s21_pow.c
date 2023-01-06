@@ -44,6 +44,38 @@ START_TEST(double_base_and_int_exp) {
 }
 END_TEST
 
+START_TEST(double_base_and_double_exp) {
+  double base = 1.23;
+  double exp = 2.23;
+
+  ck_assert_double_eq_tol(s21_pow(base, exp), pow(base, exp), S21_EPS);
+}
+END_TEST
+
+START_TEST(double_base_and_double_exp_another_case) {
+  double base = 0.23;
+  double exp = 0.15;
+
+  ck_assert_double_eq_tol(s21_pow(base, exp), pow(base, exp), S21_EPS);
+}
+END_TEST
+
+START_TEST(negative_base_and_negative_exp) {
+  double base = -0.23;
+  double exp = -9.0;  // Only integers for negative base allowed
+
+  ck_assert_double_eq_tol(s21_pow(base, exp), pow(base, exp), S21_EPS);
+}
+END_TEST
+
+START_TEST(negative_base_and_positive_exp) {
+  double base = -0.23;
+  double exp = 23.0;  // Only integers for negative base allowed
+
+  ck_assert_double_eq_tol(s21_pow(base, exp), pow(base, exp), S21_EPS);
+}
+END_TEST
+
 START_TEST(return_one_if_base_is_positive_one_positive_exp) {
   double base = 1.0;
   double exp = 26;
@@ -484,6 +516,10 @@ TCase *tcase_s21_pow(void) {
   tcase_add_checked_fixture(tc, setup, teardown);
   tcase_add_test(tc, int_base_and_int_exp);
   tcase_add_test(tc, double_base_and_int_exp);
+  tcase_add_test(tc, double_base_and_double_exp);
+  tcase_add_test(tc, double_base_and_double_exp_another_case);
+  tcase_add_test(tc, negative_base_and_negative_exp);
+  tcase_add_test(tc, negative_base_and_positive_exp);
   tcase_add_test(tc, return_one_if_base_is_positive_one_positive_exp);
   tcase_add_test(tc, return_one_if_base_is_positive_one_negative_exp);
   tcase_add_test(tc, return_one_if_base_is_positive_one_and_exp_nan);

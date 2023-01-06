@@ -11,9 +11,11 @@ OBJ := 					$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 TEST_DIR := 			./tests/
 TEST_SRC := 			$(wildcard $(TEST_DIR)*.c)
 TEST_OBJ := 			$(TEST_SRC:.c=.o)
-TEST_EXEC := 			$(TEST_DIR)tests_s21_math
+TEST_EXEC := 			$(TEST_DIR)tests_s21_math.out
 
 LIB := 					s21_math.a
+
+.PHONY: test tests
 
 all: $(LIB)
 

@@ -1,6 +1,3 @@
-// WIP
-#include <math.h>
-
 #include "../s21_math.h"
 
 double _pow_natural_exp(double base, unsigned int exp) {
@@ -29,7 +26,11 @@ long double _pow_positive_exp(double base, double exp) {
   fractional_exp_part = exp - (long double)natural_exp_part;
 
   result = _pow_natural_exp(base, natural_exp_part);
-  result += pow(base, fractional_exp_part);
+
+  if (base < 0)
+    result *= -s21_exp(fractional_exp_part * s21_log(-base));
+  else
+    result *= s21_exp(fractional_exp_part * s21_log(base));
 
   return result;
 }
@@ -54,7 +55,10 @@ long double s21_pow(double base, double exp) {
   double result;
 
   // Documented edge cases
-  if (base == 0.0 && exp < 0 && _is_even_integer(exp)) return S21_INFINITY;
+  if (base == 0.0) {
+    if (exp < 0) return S21_INFINITY;
+    if (exp > 0) return 0.0;
+  }
   if (base == 1.0) return 1.0;
   if (exp == 0.0) return 1.0;
   if (base == 0.0 && exp > 0) return 0.0;
@@ -76,10 +80,12 @@ long double s21_pow(double base, double exp) {
   if (base < 0 && !_is_integer(exp)) return S21_NAN;
 
   // Regular cases
-  if (exp < 0) {
-    result = 1 / _pow_positive_exp(base, -exp);
+  if (base < 0) {  // POSIX 2017: Only integers is allowed for negative base
+    if (exp < 0) result = 1 / _pow_natural_exp(base, (long long int)(-exp));
+    if (exp > 0) result = _pow_natural_exp(base, (long long int)exp);
   } else {
-    result = _pow_positive_exp(base, exp);
+    if (exp < 0) result = 1 / _pow_positive_exp(base, -exp);
+    if (exp > 0) result = _pow_positive_exp(base, exp);
   }
 
   return result;
