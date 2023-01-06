@@ -8,6 +8,7 @@
 ------------------------------------*/
 #define S21_EPS 1e-9
 #define S21_EXP 2.71828182846l
+#define S21_PI 3.1415926535897932384626433832795
 
 // Maybe not the best, but easiest way
 #define S21_INFINITY (1.0 / 0.0)
@@ -43,6 +44,7 @@
         User-faced functions
 ------------------------------------*/
 int s21_abs(int x);
+long double s21_atan(double x);
 long double s21_ceil(double x);
 long double s21_exp(double x);
 long double s21_fabs(double x);
