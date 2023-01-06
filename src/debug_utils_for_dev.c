@@ -30,18 +30,18 @@ int main() {
   double base;
   double exp;
   
-  base = 45;
-  exp = 60;
+  base = -INFINITY;
+  exp = -3;
   
-  printf("result_s21p=%Lf\n", s21_pow(base, exp));
-  printf("result_orig=%lf\n", pow(base, exp));
+  // printf("result_s21p=%Lf\n", s21_pow(base, exp));
+  printf("result_orig=%Lf\n", s21_pow(base, exp));
 
-  base = 13.23;
-  exp = 26;
+  // base = 13.23;
+  // exp = 26;
 
-  printf("result_s21p=%16Lf\n", s21_pow(base, exp));
-  printf("result_orig=%16lf\n", pow(base, exp));
+  // printf("result_s21p=%16Lf\n", s21_pow(base, exp));
+  // printf("result_orig=%16lf\n", pow(base, exp));
 
-  printf("%d>>%d=%d\n", 7, 1, 7>>1);
-  printf("%d>>%d=%d\n", 9, 1, 7>>1);
+  // printf("%d>>%d=%d\n", 7, 1, 7>>1);
+  // printf("%d>>%d=%d\n", 9, 1, 7>>1);
 }

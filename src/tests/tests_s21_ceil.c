@@ -66,7 +66,6 @@ START_TEST(negative_return_integer_part_minus_one) {
 }
 END_TEST
 
-
 TCase *tcase_s21_ceil(void) {
   TCase *tc;
 

@@ -8,7 +8,7 @@ double _pow_natural_exp(double base, unsigned int exp) {
   double result = 1;
 
   while (exp) {
-    if (exp % 2 == 1) {
+    if (exp % 2 != 0) {
       result *= base;  // if exp is odd -> do mul manually and exp - 1
       exp--;
     } else {
@@ -47,25 +47,31 @@ int _is_even_integer(double x) {
 int _is_odd_integer(double x) {
   if (!_is_integer(x)) return 0;
 
-  return ((long long int)x % 2 == 1) ? 1 : 0;
+  return ((long long int)x % 2 != 0) ? 1 : 0;
 }
 
 long double s21_pow(double base, double exp) {
   double result;
 
   // Documented edge cases
-  if (exp < 0 && base == 0.0 && _is_even_integer(exp)) return S21_INFINITY;
+  if (base == 0.0 && exp < 0 && _is_even_integer(exp)) return S21_INFINITY;
   if (base == 1.0) return 1.0;
   if (exp == 0.0) return 1.0;
   if (base == 0.0 && exp > 0) return 0.0;
-  if (base == -1.0 && s21_isinf(exp)) return 1.0;
-  if (s21_fabs(base) < 1.0 && s21_isinf(exp)) {
-    if s21_signbit(exp) return S21_INFINITY;
-    if (s21_signbit(exp) == 0) return 0.0;
-  } 
-  if (s21_fabs(base) > 1.0 && s21_isinf(exp)) {
-    if s21_signbit(exp) return 0.0;
-    if (s21_signbit(exp) == 0) return S21_INFINITY;
+  if (s21_isinf(exp)) {
+    if (base == -1.0) return 1.0;
+    if (s21_fabs(base) < 1.0 && exp < 0) return S21_INFINITY;
+    if (s21_fabs(base) > 1.0 && exp > 0) return S21_INFINITY;
+    if (s21_fabs(base) < 1.0 && exp > 0) return 0.0;
+    if (s21_fabs(base) > 1.0 && exp < 0) return 0.0;
+  }
+  if (s21_isinf(base)) {
+    if (base < 0 && exp < 0 && _is_odd_integer(exp)) return -0.0;
+    if (base < 0 && exp > 0 && _is_odd_integer(exp)) return -S21_INFINITY;
+    if (base < 0 && exp < 0) return +0.0;
+    if (base < 0 && exp > 0) return S21_INFINITY;
+    if (base > 0 && exp < 0) return +0.0;
+    if (base > 0 && exp > 0) return S21_INFINITY;
   }
   if (base < 0 && !_is_integer(exp)) return S21_NAN;
 

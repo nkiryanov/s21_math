@@ -212,7 +212,6 @@ START_TEST(return_plus_inf_if_exp_less_zero_and_base_minus_zero) {
 }
 END_TEST
 
-
 START_TEST(if_base_is_minus_zero_and_exp_bigger_zero_return_zero) {
   double base = -0.0;
   double exp = 1.23;
@@ -272,7 +271,7 @@ START_TEST(if_base_bigger_one_and_exp_minus_inf_return_plus_zero) {
   double exp = -INFINITY;
 
   ck_assert_double_eq(s21_pow(base, exp), pow(base, exp));
-  ck_assert_int_eq(signbit(s21_pow(base, exp)),signbit(pow(base, exp)));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), signbit(pow(base, exp)));
 }
 END_TEST
 
@@ -281,7 +280,7 @@ START_TEST(if_base_less_min_one_and_exp_minus_inf_return_plus_zero) {
   double exp = -INFINITY;
 
   ck_assert_double_eq(s21_pow(base, exp), pow(base, exp));
-  ck_assert_int_eq(signbit(s21_pow(base, exp)),signbit(pow(base, exp)));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), signbit(pow(base, exp)));
 }
 END_TEST
 
@@ -333,6 +332,150 @@ START_TEST(if_base_less_min_one_and_exp_plus_inf_return_inf) {
 }
 END_TEST
 
+START_TEST(if_odd_exp_less_zero_and_base_min_inf_return_min_zero) {
+  double base = -INFINITY;
+  double exp = -3;
+
+  ck_assert_double_eq(pow(base, exp), -0.0);
+  ck_assert_double_eq(s21_pow(base, exp), -0.0);
+
+  ck_assert_int_ge(signbit(pow(base, exp)), 1);
+  ck_assert_int_ge(signbit(s21_pow(base, exp)), 1);
+}
+END_TEST
+
+START_TEST(if_odd_exp_bigger_zero_and_base_min_inf_return_min_inf) {
+  double base = -INFINITY;
+  double exp = 3;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_ge(signbit(pow(base, exp)), 1);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_ge(signbit(s21_pow(base, exp)), 1);
+}
+END_TEST
+
+START_TEST(if_even_exp_less_zero_and_base_min_inf_return_zero) {
+  double base = -INFINITY;
+  double exp = -4;
+
+  ck_assert_double_eq(pow(base, exp), +0.0);
+  ck_assert_double_eq(s21_pow(base, exp), +0.0);
+
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_not_odd_exp_less_zero_and_base_min_inf_return_zero) {
+  double base = -INFINITY;
+  double exp = -4.23;
+
+  ck_assert_double_eq(pow(base, exp), +0.0);
+  ck_assert_double_eq(s21_pow(base, exp), +0.0);
+
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_not_odd_small_negat_exp_and_base_min_inf_return_zero) {
+  double base = -INFINITY;
+  double exp = -0.23;
+
+  ck_assert_double_eq(pow(base, exp), +0.0);
+  ck_assert_double_eq(s21_pow(base, exp), +0.0);
+
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_even_exp_bigger_zero_and_base_min_inf_return_inf) {
+  double base = -INFINITY;
+  double exp = 4;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_not_odd_exp_bigger_zero_and_base_min_inf_return_inf) {
+  double base = -INFINITY;
+  double exp = 5.23;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_not_odd_small_exp_and_base_min_inf_return_inf) {
+  double base = -INFINITY;
+  double exp = 0.23;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_negative_exp_and_base_plus_inf_return_zero) {
+  double base = INFINITY;
+  double exp = -5.23;
+
+  ck_assert_double_eq(pow(base, exp), +0.0);
+  ck_assert_double_eq(s21_pow(base, exp), +0.0);
+
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_small_negative_exp_and_base_plus_inf_return_zero) {
+  double base = INFINITY;
+  double exp = -0.23;
+
+  ck_assert_double_eq(pow(base, exp), +0.0);
+  ck_assert_double_eq(s21_pow(base, exp), +0.0);
+
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_exp_bigger_zero_and_base_plus_inf_return_inf) {
+  double base = INFINITY;
+  double exp = 5.23;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
+START_TEST(if_small_exp_bigger_zero_and_base_plus_inf_return_inf) {
+  double base = INFINITY;
+  double exp = 0.23;
+
+  ck_assert_double_infinite(pow(base, exp));
+  ck_assert_int_eq(signbit(pow(base, exp)), 0);
+
+  ck_assert_double_infinite(s21_pow(base, exp));
+  ck_assert_int_eq(signbit(s21_pow(base, exp)), 0);
+}
+END_TEST
+
 TCase *tcase_s21_pow(void) {
   TCase *tc;
 
@@ -370,6 +513,18 @@ TCase *tcase_s21_pow(void) {
   tcase_add_test(tc, if_base_range_minus_one_zero_and_exp_plus_inf_return_zero);
   tcase_add_test(tc, if_base_bigger_one_and_exp_plus_inf_return_inf);
   tcase_add_test(tc, if_base_less_min_one_and_exp_plus_inf_return_inf);
+  tcase_add_test(tc, if_odd_exp_less_zero_and_base_min_inf_return_min_zero);
+  tcase_add_test(tc, if_odd_exp_bigger_zero_and_base_min_inf_return_min_inf);
+  tcase_add_test(tc, if_even_exp_less_zero_and_base_min_inf_return_zero);
+  tcase_add_test(tc, if_not_odd_exp_less_zero_and_base_min_inf_return_zero);
+  tcase_add_test(tc, if_not_odd_small_negat_exp_and_base_min_inf_return_zero);
+  tcase_add_test(tc, if_even_exp_bigger_zero_and_base_min_inf_return_inf);
+  tcase_add_test(tc, if_not_odd_exp_bigger_zero_and_base_min_inf_return_inf);
+  tcase_add_test(tc, if_not_odd_small_exp_and_base_min_inf_return_inf);
+  tcase_add_test(tc, if_negative_exp_and_base_plus_inf_return_zero);
+  tcase_add_test(tc, if_small_negative_exp_and_base_plus_inf_return_zero);
+  tcase_add_test(tc, if_exp_bigger_zero_and_base_plus_inf_return_inf);
+  tcase_add_test(tc, if_small_exp_bigger_zero_and_base_plus_inf_return_inf);
 
   return tc;
 }
