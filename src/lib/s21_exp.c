@@ -6,7 +6,6 @@ double _s21_exp_non_negative(double x) {
   int taylor_term_num;
 
   if s21_isnan (x) return x;
-
   if s21_isinf (x) return x;  // +Inf, just as an optimization
 
   taylor_sum = 1.0;

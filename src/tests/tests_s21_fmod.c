@@ -135,6 +135,15 @@ START_TEST(if_x_is_finite_small_y_is_finite_small) {
 }
 END_TEST
 
+START_TEST(if_x_is_integer_and_y_is_exact_one_return_zero) {
+  double x = -60.0e10;
+  double y = 1.0;
+
+  ck_assert_double_eq(fmod(x, y), 0.0);
+  ck_assert_double_eq(s21_fmod(x, y), 0.0);
+}
+END_TEST
+
 TCase *tcase_s21_fmod(void) {
   TCase *tc;
 
@@ -155,6 +164,7 @@ TCase *tcase_s21_fmod(void) {
   tcase_add_test(tc, if_x_is_finite_negative_and_y_finite_negative);
   tcase_add_test(tc, if_x_is_finite_positive_and_y_finite_negative);
   tcase_add_test(tc, if_x_is_finite_small_y_is_finite_small);
+  tcase_add_test(tc, if_x_is_integer_and_y_is_exact_one_return_zero);
 
   return tc;
 }

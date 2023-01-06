@@ -27,9 +27,7 @@ long double s21_log(double x) {
   double exp_pow_term;
 
   if (x == 0) return -S21_INFINITY;
-
   if (x < 0) return S21_NAN;
-
   if (s21_isnan(x) || s21_isinf(x)) return x;  // +Inf or NaN possible here
 
   reduced_x = _reduce_x(x, &integer_part);

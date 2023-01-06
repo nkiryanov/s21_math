@@ -6,9 +6,7 @@ long double s21_sqrt(double x) {
   double middle;
 
   if (s21_isnan(x) || x == 0.0) return x;
-
   if (x < 0) return S21_NAN;
-
   if (s21_fabs(1.0 - x) < S21_EPS) return x;  // return 1.0 for values near 1.0
 
   left_edge = x > 1 ? 0.0 : x;
