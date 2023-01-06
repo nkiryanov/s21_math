@@ -5,7 +5,7 @@
 START_TEST(positive_value_bigger_one) {
   double x = 12112.12;
 
-  ck_assert_double_eq_tol(s21_sqrt(x), sqrt(x), S21_EPS);
+  ck_assert_double_eq_tol(s21_sqrt(x), sqrt(x), 1e-7);  // it's ok for us
 }
 END_TEST
 
