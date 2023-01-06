@@ -12,6 +12,7 @@ Suite *suite_s21_math(void) {
   suite_add_tcase(suite, tcase_s21_exp());
   suite_add_tcase(suite, tcase_s21_fabs());
   suite_add_tcase(suite, tcase_s21_floor());
+  suite_add_tcase(suite, tcase_s21_fmod());
   suite_add_tcase(suite, tcase_s21_isfinite());
   suite_add_tcase(suite, tcase_s21_isinf());
   suite_add_tcase(suite, tcase_s21_isnan());
