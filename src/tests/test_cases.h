@@ -4,6 +4,7 @@
 #include <check.h>
 
 TCase *tcase_s21_abs(void);
+TCase *tcase_s21_acos(void);
 TCase *tcase_s21_atan(void);
 TCase *tcase_s21_ceil(void);
 TCase *tcase_s21_exp(void);

@@ -19,9 +19,6 @@ void setup(void) {
   s21_representation[0] = '\0';
 }
 
-// Do nothing
-void teardown(void) {}
-
 START_TEST(int_base_and_int_exp) {
   double base = 45;
   double exp = 60;
@@ -513,7 +510,7 @@ TCase *tcase_s21_pow(void) {
 
   tc = tcase_create("Tests for `s21_pow` implementation");
 
-  tcase_add_checked_fixture(tc, setup, teardown);
+  tcase_add_checked_fixture(tc, setup, NULL);  // Do nothing on teardown
   tcase_add_test(tc, int_base_and_int_exp);
   tcase_add_test(tc, double_base_and_int_exp);
   tcase_add_test(tc, double_base_and_double_exp);
