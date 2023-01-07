@@ -8,6 +8,7 @@ TCase *tcase_s21_acos(void);
 TCase *tcase_s21_asin(void);
 TCase *tcase_s21_atan(void);
 TCase *tcase_s21_ceil(void);
+TCase *tcase_s21_cos(void);
 TCase *tcase_s21_exp(void);
 TCase *tcase_s21_fabs(void);
 TCase *tcase_s21_floor(void);
