@@ -21,5 +21,6 @@ TCase *tcase_s21_pow(void);
 TCase *tcase_s21_signbit(void);
 TCase *tcase_s21_sin(void);
 TCase *tcase_s21_sqrt(void);
+TCase *tcase_s21_tan(void);
 
 #endif /* SRC_TESTS_TEST_CASES_H_ */

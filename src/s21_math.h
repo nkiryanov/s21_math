@@ -57,6 +57,7 @@ long double s21_log(double x);
 long double s21_pow(double base, double exp);
 long double s21_sin(double x);
 long double s21_sqrt(double x);
+long double s21_tan(double x);
 
 /* ---------------------------------
          Internal functions
