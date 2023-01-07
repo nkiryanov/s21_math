@@ -1,7 +1,8 @@
-## School project s21_school
+## school 21 project: Overview of some "math.h" functions
 [![Lint and test](https://github.com/nkiryanov/s21_math/actions/workflows/ci.yml/badge.svg)](https://github.com/nkiryanov/s21_math/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/nkiryanov/s21_math/branch/main/graph/badge.svg?token=B1193QLRWV)](https://codecov.io/gh/nkiryanov/s21_math)
 
-### Overview of some "math.h" functions
+### Implemented functions "math.h"
 
 | No. | Function | Description |
 | --- | -------- | ----------- |
@@ -22,6 +23,5 @@
 | 15 | `long double tan(double x)` | computes tangent |
 
 ### Accuracy requirements
-
 - The total verifiable accuracy is 16 significant digits
 - Verifiable accuracy of the fractional part is up to 6 decimal places.
