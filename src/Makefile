@@ -16,11 +16,11 @@ TEST_PROFILE_DATA := 	$(SRC:.c=.gcda) $(SRC:.c=.gcno)
 TEST_EXEC := 			$(TEST_DIR)tests_s21_math.out
 
 COVERAGE_REPORT_DIR :=	./coverage/
-COVERAGE_FILE :=		coverage.txt
+COVERAGE_FILE :=		coverage.info
 
 LIB := 					s21_math.a
 
-.PHONY: test tests echo clean lint
+.PHONY: test tests echo clean lint coverage_report gcov_report
 
 all: $(LIB)
 
@@ -46,8 +46,10 @@ tests: LDLIBS += $(shell pkg-config --libs check)
 tests: $(TEST_EXEC)
 	@$^
 
-gcov_report: tests
+coverage_report: tests
 	lcov --capture --directory $(OBJ_DIR) --output-file $(COVERAGE_FILE)
+
+gcov_report: coverage_report
 	genhtml $(COVERAGE_FILE) --output-directory $(COVERAGE_REPORT_DIR)
 
 $(LIB): $(OBJ)

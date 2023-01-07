@@ -55,7 +55,7 @@ dkms.conf
 *.gcda
 *.gcno
 coverage/
-coverage.txt
+coverage.info
 
 # VSCode stuff
 .vscode/

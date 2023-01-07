@@ -29,5 +29,11 @@ jobs:
       - name: test
         run: make test
 
+      - name: gcov coverage report
+        run: make coverage_report
+
+      - name: upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
       - name: try to gen gcov_report
         run: make gcov_report
