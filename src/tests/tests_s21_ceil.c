@@ -66,6 +66,21 @@ START_TEST(negative_return_integer_part_minus_one) {
 }
 END_TEST
 
+START_TEST(not_increase_value_if_integer_already) {
+  double x = 54;
+
+  ck_assert_ldouble_eq(s21_ceil(x), ceil(x));
+}
+END_TEST
+
+
+START_TEST(if_negative_not_increase_value_if_integer_already) {
+  double x = -54;
+
+  ck_assert_ldouble_eq(s21_ceil(x), ceil(x));
+}
+END_TEST
+
 TCase *tcase_s21_ceil(void) {
   TCase *tc;
 
@@ -79,6 +94,8 @@ TCase *tcase_s21_ceil(void) {
   tcase_add_test(tc, negative_inf_return_itself);
   tcase_add_test(tc, positive_return_integer_part);
   tcase_add_test(tc, negative_return_integer_part_minus_one);
+  tcase_add_test(tc, not_increase_value_if_integer_already);
+  tcase_add_test(tc, if_negative_not_increase_value_if_integer_already);
 
   return tc;
 }

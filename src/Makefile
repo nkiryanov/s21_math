@@ -1,24 +1,25 @@
-CC := 					gcc
-CFLAGS += 				-Wall -Werror -Wextra
-LDFLAGS += 				-Wall -Werror -Wextra
+CC :=                   gcc
+CFLAGS +=               -Wall -Werror -Wextra
+LDFLAGS +=              -Wall -Werror -Wextra
 
-SRC_DIR := 				./lib/
-OBJ_DIR := 				./objects/
+SRC_DIR := ./lib/
+OBJ_DIR := ./objects/
 
-SRC := 					$(wildcard $(SRC_DIR)*.c)
-OBJ := 					$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-OBJ_PROFILED :=			$(OBJ:.o=_profiled.o)
+SRC :=                  $(wildcard $(SRC_DIR)*.c)
+OBJ :=                  $(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJ_PROFILED :=         $(OBJ:.o=_profiled.o)
 
-TEST_DIR := 			./tests/
-TEST_SRC := 			$(wildcard $(TEST_DIR)*.c)
-TEST_OBJ := 			$(TEST_SRC:.c=.o) 
-TEST_PROFILE_DATA := 	$(SRC:.c=.gcda) $(SRC:.c=.gcno)
-TEST_EXEC := 			$(TEST_DIR)tests_s21_math.out
+TEST_DIR :=             ./tests/
+TEST_SRC :=             $(wildcard $(TEST_DIR)*.c)
+TEST_OBJ :=             $(TEST_SRC:.c=.o) 
+TEST_EXEC :=            $(TEST_DIR)tests_s21_math.out
 
-COVERAGE_REPORT_DIR :=	./coverage/
-COVERAGE_FILE :=		coverage.info
+TEST_PROFILE_DATA =     $(wildcard $(OBJ_DIR)*.gcda $(OBJ_DIR)*.gcno $(TEST_DIR)*.gcda $(TEST_DIR)*.gcno)
 
-LIB := 					s21_math.a
+COVERAGE_REPORT_DIR :=  ./coverage/
+COVERAGE_FILE :=        coverage.info
+
+LIB :=                  s21_math.a
 
 .PHONY: test tests echo clean lint coverage_report gcov_report
 
@@ -31,6 +32,7 @@ echo:
 	@echo SRC=$(SRC)
 	@echo OBJ=$(OBJ)
 	@echo LDLIBS=$(LDLIBS)
+	@echo OBJ_PROFILED=$(OBJ_PROFILED)
 	@echo TEST_PROFILE_DATA=$(TEST_PROFILE_DATA)
 
 lint:

@@ -66,6 +66,20 @@ START_TEST(negative_return_integer_part_minus_one) {
 }
 END_TEST
 
+START_TEST(negative_not_rounding_if_integer_already) {
+  double x = -303;
+
+  ck_assert_ldouble_eq(s21_floor(x), floor(x));
+}
+END_TEST
+
+START_TEST(positive_not_rounding_if_integer_already) {
+  double x = 303;
+
+  ck_assert_ldouble_eq(s21_floor(x), floor(x));
+}
+END_TEST
+
 TCase *tcase_s21_floor(void) {
   TCase *tc;
 
@@ -79,6 +93,8 @@ TCase *tcase_s21_floor(void) {
   tcase_add_test(tc, negative_inf_return_itself);
   tcase_add_test(tc, positive_return_integer_part);
   tcase_add_test(tc, negative_return_integer_part_minus_one);
+  tcase_add_test(tc, negative_not_rounding_if_integer_already);
+  tcase_add_test(tc, positive_not_rounding_if_integer_already);
 
   return tc;
 }

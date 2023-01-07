@@ -9,5 +9,5 @@ long double s21_floor(double x) {
 
   floored_x = (long long int)x;
 
-  return (x > 0) ? floored_x : floored_x - 1;
+  return (x == floored_x) ? floored_x : (x > 0) ? floored_x : floored_x - 1;
 }

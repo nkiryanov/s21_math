@@ -9,5 +9,5 @@ long double s21_ceil(double x) {
 
   ceiled_x = (long long int)x;
 
-  return (x > 0) ? ceiled_x + 1 : ceiled_x;
+  return (x == ceiled_x) ? ceiled_x : (x < 0) ? ceiled_x : ceiled_x + 1;
 }
