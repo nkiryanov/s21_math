@@ -27,22 +27,15 @@ long double _pow_positive_exp(double base, double exp) {
 
   result = _pow_natural_exp(base, natural_exp_part);
 
-  if (base < 0)
-    result *= -s21_exp(fractional_exp_part * s21_log(-base));
-  else
-    result *= s21_exp(fractional_exp_part * s21_log(base));
+  // Not needed for base < 0 cause
+  // POSIX 2017: Only integers is allowed for negative base
+  if (base > 0) result *= s21_exp(fractional_exp_part * s21_log(base));
 
   return result;
 }
 
 int _is_integer(double x) {
   return (s21_isfinite(x) && s21_fmod(x, 1.0) == 0.0) ? 1 : 0;
-}
-
-int _is_even_integer(double x) {
-  if (!_is_integer(x)) return 0;
-
-  return ((long long int)x % 2 == 0) ? 1 : 0;
 }
 
 int _is_odd_integer(double x) {
@@ -80,13 +73,8 @@ long double s21_pow(double base, double exp) {
   if (base < 0 && !_is_integer(exp)) return S21_NAN;
 
   // Regular cases
-  if (base < 0) {  // POSIX 2017: Only integers is allowed for negative base
-    if (exp < 0) result = 1 / _pow_natural_exp(base, (long long int)(-exp));
-    if (exp > 0) result = _pow_natural_exp(base, (long long int)exp);
-  } else {
-    if (exp < 0) result = 1 / _pow_positive_exp(base, -exp);
-    if (exp > 0) result = _pow_positive_exp(base, exp);
-  }
+  if (exp > 0) result = _pow_positive_exp(base, exp);
+  if (exp < 0) result = 1 / _pow_positive_exp(base, -exp);
 
   return result;
 }

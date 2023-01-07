@@ -7,15 +7,20 @@ OBJ_DIR := 				./objects/
 
 SRC := 					$(wildcard $(SRC_DIR)*.c)
 OBJ := 					$(SRC:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+OBJ_PROFILED :=			$(OBJ:.o=_profiled.o)
 
 TEST_DIR := 			./tests/
 TEST_SRC := 			$(wildcard $(TEST_DIR)*.c)
-TEST_OBJ := 			$(TEST_SRC:.c=.o)
+TEST_OBJ := 			$(TEST_SRC:.c=.o) 
+TEST_PROFILE_DATA := 	$(SRC:.c=.gcda) $(SRC:.c=.gcno)
 TEST_EXEC := 			$(TEST_DIR)tests_s21_math.out
+
+COVERAGE_REPORT_DIR :=	./coverage/
+COVERAGE_FILE :=		coverage.txt
 
 LIB := 					s21_math.a
 
-.PHONY: test tests
+.PHONY: test tests echo clean lint
 
 all: $(LIB)
 
@@ -26,14 +31,24 @@ echo:
 	@echo SRC=$(SRC)
 	@echo OBJ=$(OBJ)
 	@echo LDLIBS=$(LDLIBS)
+	@echo TEST_PROFILE_DATA=$(TEST_PROFILE_DATA)
 
 lint:
 	@cp ../materials/linters/CPPLINT.cfg .
 	@python3 ../materials/linters/cpplint.py --extension=c $(SRC_DIR)* $(TEST_DIR)*
 	@rm CPPLINT.cfg
 
-test tests: $(TEST_EXEC)
+test: tests
+
+tests: CFLAGS += $(shell pkg-config --cflags-only-I check) --coverage -g
+tests: LDFLAGS += --coverage
+tests: LDLIBS += $(shell pkg-config --libs check)
+tests: $(TEST_EXEC)
 	@$^
+
+gcov_report: tests
+	lcov --capture --directory $(OBJ_DIR) --output-file $(COVERAGE_FILE)
+	genhtml $(COVERAGE_FILE) --output-directory $(COVERAGE_REPORT_DIR)
 
 $(LIB): $(OBJ)
 	$(AR) -rcs $@ $^
@@ -41,13 +56,16 @@ $(LIB): $(OBJ)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-$(TEST_DIR)%.o: CFLAGS += $(shell pkg-config --cflags-only-I check)
+$(OBJ_DIR)%_profiled.o: $(SRC_DIR)%.c
+	$(CC) -c $(CFLAGS) $^ -o $@
+
 $(TEST_DIR)%.o: $(TEST_DIR)%.c
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-$(TEST_EXEC): LDLIBS += $(shell pkg-config --libs check)
-$(TEST_EXEC): $(TEST_OBJ) $(LIB)
+$(TEST_EXEC): $(TEST_OBJ) $(OBJ_PROFILED)
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 clean:
-	rm -rf $(OBJ) $(LIB) $(TEST_OBJ) $(TEST_EXEC)
+	rm -rf 	$(OBJ) $(LIB)
+	rm -rf $(TEST_OBJ) $(TEST_EXEC) $(TEST_PROFILE_DATA) $(OBJ_PROFILED)
+	rm -rf 	$(COVERAGE_FILE) $(COVERAGE_REPORT_DIR)

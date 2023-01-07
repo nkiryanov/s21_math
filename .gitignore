@@ -51,6 +51,12 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+# C profile data
+*.gcda
+*.gcno
+coverage/
+coverage.txt
+
 # VSCode stuff
 .vscode/
 

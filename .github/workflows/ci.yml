@@ -17,8 +17,8 @@ jobs:
         with:
           python-version: "3.10.8"
 
-      - name: install check testing framework
-        run: sudo apt-get install check -y
+      - name: install dependencies
+        run: sudo apt-get install check lcov -y
 
       - name: lint
         run: make lint
@@ -28,3 +28,6 @@ jobs:
 
       - name: test
         run: make test
+
+      - name: try to gen gcov_report
+        run: make gcov_report

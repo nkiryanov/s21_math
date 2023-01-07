@@ -2,8 +2,8 @@
 
 long double s21_sin(double x) {
   // Edge cases
-  if (s21_isnan (x) || x == 0.0) return x;
-  if s21_isinf (x) return S21_NAN;
+  if (s21_isnan(x) || x == 0.0) return x;
+  if (s21_isinf(x)) return S21_NAN;
 
   long double series_sum;
   long double series_term;
